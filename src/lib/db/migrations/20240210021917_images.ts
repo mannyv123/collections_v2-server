@@ -1,7 +1,7 @@
 import type { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
-   return knex.schema.createTable("images", (table) => {
+   return await knex.schema.createTable("images", (table) => {
       table.uuid("id").primary();
       table.string("name").notNullable();
       table.point("latitude").notNullable();
@@ -9,22 +9,23 @@ export async function up(knex: Knex): Promise<void> {
       table.string("city").notNullable();
       table.string("country").notNullable();
       table
-         .foreign("collection_id")
+         .uuid("collection_id")
+         .notNullable()
          .references("id")
          .inTable("collections")
-         .notNullable()
          .onUpdate("CASCADE")
          .onDelete("CASCADE");
+
       table
-         .foreign("user_id")
+         .uuid("user_id")
+         .notNullable()
          .references("id")
          .inTable("users")
-         .notNullable()
          .onUpdate("CASCADE")
          .onDelete("CASCADE");
    });
 }
 
 export async function down(knex: Knex): Promise<void> {
-   return knex.schema.dropTable("images");
+   return await knex.schema.dropTable("images");
 }

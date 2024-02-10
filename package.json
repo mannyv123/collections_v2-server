@@ -5,8 +5,10 @@
    "main": "dist/server.js",
    "scripts": {
       "build": "npx tsc",
-      "start": "NODE_ENV=production node dist/server.js",
-      "dev": "NODE_ENV=development concurrently \"npx tsc -w\" \"nodemon src/server.ts\"",
+      "start": "node dist/server.js",
+      "dev": "concurrently \"npx tsc -w\" \"nodemon src/server.ts\"",
+      "migrate-latest": "knex --knexfile src/lib/db/knexfile.ts migrate:latest",
+      "migrate-rollback": "knex --knexfile src/lib/db/knexfile.ts migrate:rollback",
       "test": "echo \"Error: no test specified\" && exit 1",
       "prepare": "husky install"
    },

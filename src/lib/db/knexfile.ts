@@ -1,14 +1,16 @@
 import type { Knex } from "knex";
-import { envConfig } from "../envConfig";
+import * as dotenv from "dotenv";
+
+dotenv.config({ path: "../../../.env" });
 
 const config: { [key: string]: Knex.Config } = {
    development: {
       client: "mysql2",
       connection: {
-         host: envConfig.database.DB_HOST,
-         database: envConfig.database.DB_NAME,
-         user: envConfig.database.DB_USER,
-         password: envConfig.database.DB_USER,
+         host: process.env.DB_HOST,
+         database: process.env.DB_NAME,
+         user: process.env.DB_USER,
+         password: process.env.DB_PASSWORD,
       },
       pool: {
          min: 2,
