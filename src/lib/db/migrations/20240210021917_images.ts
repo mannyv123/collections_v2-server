@@ -4,8 +4,7 @@ export async function up(knex: Knex): Promise<void> {
    return await knex.schema.createTable("images", (table) => {
       table.uuid("id").primary();
       table.string("name").notNullable();
-      table.point("latitude").notNullable();
-      table.point("longitude").notNullable();
+      table.point("location").notNullable();
       table.string("city").notNullable();
       table.string("country").notNullable();
       table
