@@ -7,6 +7,9 @@
       "build": "npx tsc",
       "start": "node dist/server.js",
       "dev": "concurrently \"npx tsc -w\" \"nodemon src/server.ts\"",
+      "migrate-latest": "knex --knexfile src/lib/db/knexfile.ts migrate:latest",
+      "migrate-rollback": "knex --knexfile src/lib/db/knexfile.ts migrate:rollback",
+      "seed": "knex --knexfile src/lib/db/knexfile.ts seed:run",
       "test": "echo \"Error: no test specified\" && exit 1",
       "prepare": "husky install"
    },
@@ -21,7 +24,9 @@
    "dependencies": {
       "cors": "^2.8.5",
       "dotenv": "^16.4.1",
-      "express": "^4.18.2"
+      "express": "^4.18.2",
+      "knex": "^3.1.0",
+      "mysql2": "^3.9.1"
    },
    "devDependencies": {
       "@types/cors": "^2.8.17",
