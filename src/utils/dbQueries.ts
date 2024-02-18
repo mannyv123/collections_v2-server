@@ -1,5 +1,5 @@
 import knex from "knex";
-import config from "./knexfile";
+import config from "../lib/db/knexfile";
 
 const db = knex(config.development);
 
@@ -11,4 +11,9 @@ export const getAllCollections = async () => {
 // get single collection from db
 export const getCollection = async (collectionId: string) => {
    return await db("collections").where({ id: collectionId });
+};
+
+// get images for single collection from db
+export const getCollectionImages = async (collectionId: string) => {
+   return db("images").where("collection_id", collectionId);
 };
