@@ -40,6 +40,8 @@ declare module "knex/types/tables.js" {
       id: string;
       image_id: string;
       user_id: string;
+      created_at: string;
+      updated_at: string;
    }
 
    interface Comments {
@@ -47,17 +49,24 @@ declare module "knex/types/tables.js" {
       comment: string;
       image_id: string;
       user_id: string;
+      created_at: string;
+      updated_at: string;
    }
 
    interface Follows {
       id: string;
       follower_id: string;
       following_id: string;
+      created_at: string;
+      updated_at: string;
    }
 
    interface Tables {
       users: User;
       collections: Collections;
       images: Images;
+      likes: Likes;
+      comments: Comments;
+      follows: Follows;
    }
 }
