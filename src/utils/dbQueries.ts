@@ -13,7 +13,11 @@ export const getCollection = async (collectionId: string) => {
    return await db("collections").where({ id: collectionId });
 };
 
-// get images for single collection from db
-export const getCollectionImages = async (collectionId: string) => {
-   return db("images").where("collection_id", collectionId);
+// get images for single collection or all from db
+export const getImages = async (collectionId?: string) => {
+   if (collectionId) {
+      return await db("images").where("collection_id", collectionId);
+   } else {
+      return await db("images");
+   }
 };

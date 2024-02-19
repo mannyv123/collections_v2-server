@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import { getAllCollections, getCollection, getCollectionImages } from "../utils/dbQueries";
+import { getAllCollections, getCollection, getImages } from "../utils/dbQueries";
 import { triggerLambda } from "../utils/awsQueries";
 import { ImageWithUrl } from "../lib/types/types";
 
@@ -43,7 +43,7 @@ export const getSingleCollectionImages = (async (req: Request, res: Response) =>
    }
 
    try {
-      const imagesData = await getCollectionImages(collectionId);
+      const imagesData = await getImages(collectionId);
 
       if (imagesData.length === 0) {
          return res.status(404).send("No images found");
