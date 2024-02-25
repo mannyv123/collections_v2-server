@@ -27,7 +27,10 @@ declare module "knex/types/tables.js" {
    interface Images {
       id: string;
       name: string;
-      location: string;
+      location: {
+         x: number;
+         y: number;
+      };
       city: string;
       country: string;
       collection_id: string;
