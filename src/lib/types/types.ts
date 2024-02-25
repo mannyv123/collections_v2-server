@@ -1,4 +1,4 @@
-import type { Images } from "knex/types/tables.js";
+import type { Images, Collections } from "knex/types/tables.js";
 
 // image sizes
 export type ImageSize = "full" | "thumbnail";
@@ -14,4 +14,9 @@ export type LambdaPayload = {
 // Images type with image url
 export interface ImageWithUrl extends Images {
    imageUrl: string;
+}
+
+// Collection details with username
+export interface UserCollection extends Collections {
+   username: string;
 }
