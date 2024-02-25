@@ -1,5 +1,6 @@
 import knex from "knex";
 import config from "../lib/db/knexfile";
+import { UserCollection } from "../lib/types/types";
 
 const db = knex(config.development);
 
@@ -10,7 +11,13 @@ export const getAllCollections = async () => {
 
 // get single collection from db
 export const getCollection = async (collectionId: string) => {
-   return await db("collections").where({ id: collectionId });
+   const collection = (await db
+      .select(["collections.*", "users.username"])
+      .from("collections")
+      .join("users", { "users.id": "collections.user_id" })
+      .where({ "collections.id": collectionId })) as UserCollection[];
+
+   return collection;
 };
 
 // get images for single collection or all from db
