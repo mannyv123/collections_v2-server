@@ -2,6 +2,9 @@ import { Knex } from "knex";
 import usersData from "../seed_data/users";
 import collectionsData from "../seed_data/collections";
 import imagesData from "../seed_data/images";
+import likesData from "../seed_data/likes";
+import commentsData from "../seed_data/comments";
+import followsData from "../seed_data/follows";
 
 export async function seed(knex: Knex): Promise<void> {
    // Deletes ALL existing entries
@@ -21,4 +24,7 @@ export async function seed(knex: Knex): Promise<void> {
          location: knex.raw(image.location),
       })),
    );
+   await knex("likes").insert(likesData);
+   await knex("comments").insert(commentsData);
+   await knex("follows").insert(followsData);
 }
