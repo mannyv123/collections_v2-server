@@ -28,3 +28,9 @@ export const getImages = async (collectionId?: string) => {
       return await db("images");
    }
 };
+
+// get single image details
+export const getSingleImageFromDb = async (imageId: string) => {
+   const image = await db("images").where("id", imageId);
+   return image;
+};

@@ -18,7 +18,7 @@ export const getSingleCollection = (async (req: Request, res: Response) => {
    const { collectionId } = req.params;
 
    if (!collectionId) {
-      res.status(400).send("No collection ID provided");
+      return res.status(400).send("No collection ID provided");
    }
 
    try {
@@ -39,7 +39,7 @@ export const getSingleCollectionImages = (async (req: Request, res: Response) =>
    const { collectionId } = req.params;
 
    if (!collectionId) {
-      res.status(400).send("No collection ID provided");
+      return res.status(400).send("No collection ID provided");
    }
 
    try {
