@@ -1,6 +1,6 @@
 import knex from "knex";
 import config from "../lib/db/knexfile";
-import { UserCollection } from "../lib/types/types";
+import { CommentsWithUsername, LikesWithUsername, UserCollection } from "../lib/types/types";
 
 const db = knex(config.development);
 
@@ -37,12 +37,22 @@ export const getSingleImageFromDb = async (imageId: string) => {
 
 // get image likes from db
 export const getLikesFromDb = async (imageId: string) => {
-   const likes = await db("likes").where("image_id", imageId);
+   const likes = (await db
+      .select(["likes.*", "users.username"])
+      .from("likes")
+      .join("users", { "users.id": "likes.user_id" })
+      .where({ "likes.image_id": imageId })) as LikesWithUsername[];
+
    return likes;
 };
 
 // get image comments from db
 export const getCommentsFromDb = async (imageId: string) => {
-   const comments = await db("comments").where("image_id", imageId);
+   const comments = (await db
+      .select(["comments.*", "users.username"])
+      .from("comments")
+      .join("users", { "users.id": "comments.user_id" })
+      .where({ "comments.image_id": imageId })) as CommentsWithUsername[];
+
    return comments;
 };
