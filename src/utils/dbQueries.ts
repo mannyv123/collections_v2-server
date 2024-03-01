@@ -34,3 +34,9 @@ export const getSingleImageFromDb = async (imageId: string) => {
    const image = await db("images").where("id", imageId);
    return image;
 };
+
+// get image likes from db
+export const getLikesFromDb = async (imageId: string) => {
+   const likes = await db("likes").where("image_id", imageId);
+   return likes;
+};

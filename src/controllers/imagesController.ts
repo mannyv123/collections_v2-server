@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import { getImages, getSingleImageFromDb } from "../utils/dbQueries";
+import { getImages, getLikesFromDb, getSingleImageFromDb } from "../utils/dbQueries";
 import { triggerLambda } from "../utils/awsQueries";
 import { ImageWithUrl } from "../lib/types/types";
 
@@ -42,3 +42,22 @@ export const getSingleImage = (async (req: Request, res: Response) => {
       res.status(500).send(error);
    }
 }) as RequestHandler;
+
+// Get image likes
+export const getLikes = (async (req: Request, res: Response) => {
+   const { imageId } = req.params;
+
+   if (!imageId) {
+      return res.status(400).send("Missing parameters in request");
+   }
+
+   try {
+      const likes = await getLikesFromDb(imageId);
+
+      res.status(200).send(likes);
+   } catch (error) {
+      res.status(500).send(error);
+   }
+}) as RequestHandler;
+
+// Get image comments
